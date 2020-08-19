@@ -28,7 +28,7 @@ const letterPositions = (sentence) => {
     }
   }
   return results;
-}
+};
 
 assertArraysEqual(letterPositions('hello').h,[0]);
 assertArraysEqual(letterPositions('hello').e,[1]);
