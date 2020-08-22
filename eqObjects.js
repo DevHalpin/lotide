@@ -1,10 +1,8 @@
 const assertEqual = function(actual, expected) {
-  const outputValue = actual;
-  const eValue = expected;
   if (actual === expected) {
-    console.log(`🟢🟢🟢 Assertion Passed: ${outputValue} === ${eValue}`);
+    console.log(`✅ Assertion Passed: ${actual} === ${expected}`);
   } else {
-    console.log(`🚫🚫🚫 Assertion Failed: ${outputValue} !== ${eValue}`);
+    console.log(`🚫 Assertion Failed: ${actual} !== ${expected}`);
   }
 };
 
@@ -26,17 +24,20 @@ const eqObjects = (object1, object2) => {
   if (keys1.length !== keys2.length) {
     return false;
   }
-  for (const key of keys1) {
-    if (object1[key] instanceof Array && object2[key] instanceof Array) {
-      console.log(object1[key]);
-      if (!eqArrays(object1[key],object2[key])) {
+    for (const key of keys1) {
+      if (object1[key] instanceof Array && object2[key] instanceof Array) {
+        if (!eqArrays(object1[key],object2[key])) {
+          return false;
+        }
+      }
+      if (object1[key] instanceof Object && object2[key] instanceof Object) {
+        return eqObjects(object1[key],object2[key])
+      }
+      else if (object1[key] !== object2[key]) {
         return false;
       }
-    } else if (object1[key] !== object2[key]) {
-      return false;
     }
-  }
-  return true;
+    return true;
 };
 
 const ab = { a: "1", b: "2" };
@@ -52,3 +53,8 @@ assertEqual(eqObjects(cd, dc), true); // => true
 
 const cd2 = { c: "1", d: ["2", 3, 4] };
 assertEqual(eqObjects(cd, cd2), false); // => false
+
+assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }),true) // => true
+
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false) // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false)
