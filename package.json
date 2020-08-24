@@ -1,7 +1,7 @@
 {
-  "name": "lotide",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@devhalpin/lotide",
+  "version": "1.0.1",
+  "description": "Mini copy of lodash library for LHL project",
   "main": "assertArraysEqual.js",
   "directories": {
     "test": "test"
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/DevHalpin/lotide.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Halpin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DevHalpin/lotide/issues"
